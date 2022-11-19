@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 use Doctrine\Persistence\ManagerRegistry;
 
+use App\Entity\Address;
 use App\Entity\School;
 use App\Repository\SchoolRepository;
 use App\Form\Type\SchoolType;
@@ -44,7 +45,14 @@ class SchoolController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $school = new School();
-            $school->setName($form->get('name')->getData());
+            $school->setName($form->get('School_name')->getData());
+
+            $address = new Address();
+            $address->setStreet($form->get('Street')->getData());
+            $address->setPostalCode($form->get('Postal_code')->getData());
+            $address->setCity($form->get('City')->getData());
+
+            $school->setAddress($address);
 
             $entityManager->persist($school);
             $entityManager->flush();

@@ -5,8 +5,12 @@
 
 {% block body %}
 
-    <div class="ml-32 mr-32 mt-20">
-        <p class="text-white">{{ school.name }}</p>
-    </div>
+	<div class="ml-32 mr-32 mt-20">
+		<div class="block max-w-sm p-6 bg-gray-800 border-gray-700 border rounded-lg shadow-md">
+			<h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ school.name }}</h5>
+            <p class="font-normal text-gray-700 dark:text-gray-400">{{ school.address.city }}<span> {{ school.address.postalCode }}</span></p>
+			<p class="font-normal text-gray-700 dark:text-gray-400">{{ school.address.street }}</p>
+		</div>
+	</div>
 
 {% endblock %}

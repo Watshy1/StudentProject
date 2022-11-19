@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}School list
+{% endblock %}
+
+{% block body %}
+
+	<div class="ml-32 mr-32 mt-20 overflow-x-auto relative shadow-md sm:rounded-lg">
+		<table class="w-full text-sm text-left text-gray-500">
+			<thead class="text-xs text-gray-400 uppercase bg-gray-700">
+				<tr>
+					<th scope="col" class="py-3 px-6">
+						Name
+					</th>
+					<th scope="col" class="py-3 px-6">
+						Show
+					</th>
+					<th scope="col" class="py-3 px-6">
+						Delete
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for school in schools %}
+					<tr class="{% if school.id is divisible by(2) %}bg-gray-700 border-gray-700{% else %}bg-gray-900 border-gray-700{% endif %}">
+						<th scope="row" class="py-4 px-6 font-medium text-white whitespace-nowrap">
+							{{ school.name }}
+						</th>
+						<td class="py-4 px-6">
+							<a href="{{ path('app_school_show', {'id': school.id}) }}">show</a>
+						</td>
+						<td class="py-4 px-6">
+							<a href="{{ path('app_school_delete', {'id': school.id}) }}">delete</a>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td class="py-4 px-6 font-medium text-white whitespace-nowrap">
+                            Not School Found
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+{% endblock %}

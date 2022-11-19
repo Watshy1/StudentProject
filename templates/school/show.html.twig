@@ -1,15 +1,68 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}School Show
+{% block title %}
+	School Show
 {% endblock %}
 
 {% block body %}
 
 	<div class="ml-32 mr-32 mt-20">
-		<div class="block max-w-sm p-6 bg-gray-800 border-gray-700 border rounded-lg shadow-md">
-			<h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ school.name }}</h5>
-            <p class="font-normal text-gray-700 dark:text-gray-400">{{ school.address.city }}<span> {{ school.address.postalCode }}</span></p>
-			<p class="font-normal text-gray-700 dark:text-gray-400">{{ school.address.street }}</p>
+		<div class="flex items-center">
+			<div class="block w-80 p-6 bg-gray-800 border-gray-700 border rounded-lg shadow-md">
+				<h5 class="mb-2 text-2xl font-bold tracking-tight text-white">{{ school.name }}</h5>
+				<p class="font-normal text-gray-400">{{ school.address.city }}
+					<span>
+						{{ school.address.postalCode }}
+					</span>
+				</p>
+				<p class="font-normal text-gray-400">{{ school.address.street }}</p>
+			</div>
+			<div class="ml-4">
+				<a href="{{ path('app_classe_create', {'schoolId': school.id}) }}">
+					<button class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue">
+						Create class
+					</button>
+				</a>
+			</div>
+		</div>
+
+		<div class="overflow-x-auto sm:rounded-lg mt-4 shadow-md">
+			<table class="w-full text-sm text-left text-gray-500">
+				<thead class="text-xs text-gray-400 uppercase bg-gray-700">
+					<tr>
+						<th scope="col" class="py-3 px-6">
+							Class Name
+						</th>
+						<th scope="col" class="py-3 px-6">
+							Details
+						</th>
+						<th scope="col" class="py-3 px-6">
+							Delete
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for class in school.classes %}
+						<tr class="{% if school.id is divisible by(2) %}bg-gray-700 border-gray-700{% else %}bg-gray-900 border-gray-700{% endif %}">
+							<th scope="row" class="py-4 px-6 font-medium text-white whitespace-nowrap">
+								{{ class.name }}
+							</th>
+							<td class="py-4 px-6">
+								<a href="{{ path('app_classe_show', {'id': class.id}) }}">show</a>
+							</td>
+							<td class="py-4 px-6">
+								<a href="{{ path('app_classe_delete', {'id': class.id}) }}">delete</a>
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="3" class="text-center text-white text-xl font-bold p-4 bg-gray-700 border-gray-600 border shadow-md">
+								No Class
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
 		</div>
 	</div>
 

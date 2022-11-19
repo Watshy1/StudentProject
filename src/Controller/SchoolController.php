@@ -11,7 +11,9 @@ use Doctrine\Persistence\ManagerRegistry;
 
 use App\Entity\Address;
 use App\Entity\School;
+
 use App\Repository\SchoolRepository;
+
 use App\Form\Type\SchoolType;
 
 class SchoolController extends AbstractController
@@ -45,7 +47,7 @@ class SchoolController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $school = new School();
-            $school->setName($form->get('School_name')->getData());
+            $school->setName($form->get('name')->getData());
 
             $address = new Address();
             $address->setStreet($form->get('Street')->getData());

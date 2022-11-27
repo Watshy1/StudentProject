@@ -10,10 +10,12 @@
 		<div class="flex items-center">
 			<div class="block max-w-sm p-6 bg-gray-800 border-gray-700 border rounded-lg shadow-md">
 				<h5 class="mb-2 text-2xl font-bold tracking-tight text-white">{{ student.firstName }} {{ student.lastName }}</h5>
+				<h4 class="mb-2 text-lg font-bold tracking-tight text-white">{{ student.email }}</h4>
+				<h4 class="mb-2 text-lg font-bold tracking-tight text-white">{{ student.birthdate|date("d/m/Y") }}</h4>
 			</div>
 		</div>
 		<div class="block p-6 mt-10 bg-gray-800 border-gray-700 border rounded-lg shadow-md">
-
+			<h5 class="mb-2 text-2xl font-bold tracking-tight text-white">Notes</h5>
 		</div>
 	</div>
 

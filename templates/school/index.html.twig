@@ -17,6 +17,9 @@
 						Details
 					</th>
 					<th scope="col" class="py-3 px-6">
+						Edit
+					</th>
+					<th scope="col" class="py-3 px-6">
 						Delete
 					</th>
 				</tr>
@@ -29,6 +32,9 @@
 						</th>
 						<td class="py-4 px-6">
 							<a href="{{ path('app_school_show', {'id': school.id}) }}">show</a>
+						</td>
+						<td class="py-4 px-6">
+							<a href="{{ path('app_school_edit', {'id': school.id}) }}">edit</a>
 						</td>
 						<td class="py-4 px-6">
 							<a href="{{ path('app_school_delete', {'id': school.id}) }}">delete</a>

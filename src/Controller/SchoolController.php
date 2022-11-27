@@ -67,6 +67,40 @@ class SchoolController extends AbstractController
         ]);
     }
 
+    #[Route('/school/edit/{id}', name: 'app_school_edit')]
+    public function edit(Request $request, School $school, ManagerRegistry $doctrine): Response
+    {
+        $entityManager = $doctrine->getManager();
+
+        $data = [
+            'name' => $school->getName(),
+            'Street' => $school->getAddress()->getStreet(),
+            'Postal_code' => $school->getAddress()->getPostalCode(),
+            'City' => $school->getAddress()->getCity(),
+        ];
+
+        $form = $this->createForm(SchoolType::class, $data);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $school->setName($form->get('name')->getData());
+
+            $address = $school->getAddress();
+            $address->setStreet($form->get('Street')->getData());
+            $address->setPostalCode($form->get('Postal_code')->getData());
+            $address->setCity($form->get('City')->getData());
+
+            $entityManager->persist($school);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_school');
+        }
+
+        return $this->render('school/edit.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
     #[Route('/school/delete/{id}', name: 'app_school_delete')]
     public function delete(School $school, ManagerRegistry $doctrine): Response
     {

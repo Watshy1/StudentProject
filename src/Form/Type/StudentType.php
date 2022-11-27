@@ -58,7 +58,7 @@ class StudentType extends AbstractType
                 'class' => 'block mt-2 text-sm font-medium text-white'
             )))
             ->add('create', SubmitType::class, array('attr' => array(
-                'class' => 'mt-2 text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-6 py-2.5'
+                'class' => 'mt-2 text-white bg-blue-600 font-medium rounded-lg text-sm px-6 py-2.5'
             )))
         ;
     }

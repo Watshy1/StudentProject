@@ -66,10 +66,12 @@ class StudentController extends AbstractController
     #[Route('/student/delete/{id}', name: 'app_student_delete')]
     public function delete(Student $student, ManagerRegistry $doctrine): Response
     {
+        $classeId = $student->getClasse()[0]->getId();
+        
         $entityManager = $doctrine->getManager();
         $entityManager->remove($student);
         $entityManager->flush();
 
-        return $this->redirectToRoute('app_classe_show', ['id' => $student->getClasse()[0]->getId()]);
+        return $this->redirectToRoute('app_classe_show', ['id' => $classeId]);
     }
 }

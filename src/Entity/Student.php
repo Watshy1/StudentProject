@@ -38,9 +38,13 @@ class Student
     #[ORM\JoinColumn(nullable: false)]
     private ?Address $address = null;
 
+    #[ORM\ManyToMany(targetEntity: Cours::class, mappedBy: 'students')]
+    private Collection $cours;
+
     public function __construct()
     {
         $this->classe = new ArrayCollection();
+        $this->cours = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -140,6 +144,33 @@ class Student
     public function setAddress(Address $address): self
     {
         $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Cours>
+     */
+    public function getCours(): Collection
+    {
+        return $this->cours;
+    }
+
+    public function addCour(Cours $cour): self
+    {
+        if (!$this->cours->contains($cour)) {
+            $this->cours->add($cour);
+            $cour->addStudent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCour(Cours $cour): self
+    {
+        if ($this->cours->removeElement($cour)) {
+            $cour->removeStudent($this);
+        }
 
         return $this;
     }

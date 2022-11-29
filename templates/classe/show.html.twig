@@ -20,24 +20,43 @@
 				</a>
 			</div>
 		</div>
-		<div class="block p-6 mt-10 bg-gray-800 border-gray-700 border rounded-lg shadow-md">
-			<h5 class="mb-4 text-2xl font-bold tracking-tight text-white">Students List</h5>
-			<ul class="flex gap-5 flex-wrap">
-				{% for student in classe.students %}
-					<a href="{{ path('app_student_show', {'id': student.id}) }}" class="font-normal hover:underline">
-						<li class="flex items-center justify-center text-white p-4 bg-gray-700 border-gray-600 border rounded-lg shadow-md">
-							<p>{{ student.firstName }}</p>
-							<p class="ml-2">{{ student.lastName }}</p>
-						</li>
-					</a>
-				{% else %}
-					<li class="flex-1">
-						<div class="flex flex-col items-center justify-center p-4 bg-gray-700 border-gray-600 border rounded-lg shadow-md">
-							<h5 class="mt-2 text-xl font-bold tracking-tight text-white">No students</h5>
-						</div>
-					</li>
-				{% endfor %}
-			</ul>
+		<div class="overflow-x-auto sm:rounded-lg mt-4 shadow-md">
+			<table class="w-full text-sm text-left text-gray-500">
+				<thead class="text-xs text-gray-400 uppercase bg-gray-700">
+					<tr>
+						<th scope="col" class="py-3 px-6">
+							Name
+						</th>
+						<th scope="col" class="py-3 px-6">
+							Details
+						</th>
+						<th scope="col" class="py-3 px-6">
+							Delete
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for student in classe.students %}
+						<tr class="bg-gray-900 border-gray-700">
+							<th scope="row" class="py-4 px-6 font-medium text-white whitespace-nowrap">
+								{{ student.firstName }} {{ student.lastName }}
+							</th>
+							<td class="py-4 px-6">
+								<a href="{{ path('app_student_show', {'id': student.id}) }}">show</a>
+							</td>
+							<td class="py-4 px-6">
+								<a href="{{ path('app_student_delete', {'id': student.id}) }}">delete</a>
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="3" class="text-center text-white text-xl font-bold p-4 bg-gray-700 border-gray-600 border shadow-md">
+								No Students
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
 		</div>
 	</div>
 
